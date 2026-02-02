@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BORNE Kiosk Design System - Fast Food Modern Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+@layer base {
+  :root {
+    /* Primary - Vibrant Red (Fast Food Brand) */
+    --primary: 350 85% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Background - Warm Cream White */
+    --background: 40 30% 98%;
+    --foreground: 0 0% 15%;
+
+    /* Card - Pure White */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    /* Secondary - Warm Gray */
+    --secondary: 40 15% 94%;
+    --secondary-foreground: 0 0% 20%;
+
+    /* Muted */
+    --muted: 40 10% 92%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Accent - Golden Yellow */
+    --accent: 45 95% 55%;
+    --accent-foreground: 0 0% 10%;
+
+    /* Success - Fresh Green */
+    --success: 145 65% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border & Input */
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 350 85% 50%;
+
+    --radius: 1rem;
+
+    /* Custom Kiosk Variables */
+    --kiosk-header-height: 80px;
+    --kiosk-footer-height: 100px;
+    --kiosk-sidebar-width: 140px;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(350 85% 50%), hsl(350 85% 40%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 95% 55%), hsl(40 95% 50%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 15%), hsl(0 0% 8%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
+    --shadow-medium: 0 8px 30px -8px hsl(0 0% 0% / 0.15);
+    --shadow-strong: 0 20px 50px -15px hsl(0 0% 0% / 0.25);
+    --shadow-primary: 0 8px 25px -5px hsl(350 85% 50% / 0.4);
+    --shadow-accent: 0 8px 25px -5px hsl(45 95% 55% / 0.4);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 25%;
+    --sidebar-primary: 350 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 15% 94%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 40 20% 88%;
+    --sidebar-ring: 350 85% 50%;
+  }
+
+  .dark {
+    --primary: 350 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 45 95% 55%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 350 85% 55%;
+
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 350 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 350 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Poppins', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    user-select: none;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  /* Kiosk Button Variants */
+  .btn-kiosk-primary {
+    @apply bg-primary text-primary-foreground font-bold py-4 px-8 rounded-xl;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:scale-[1.02] active:scale-[0.98];
+    box-shadow: var(--shadow-primary);
+  }
+
+  .btn-kiosk-secondary {
+    @apply bg-secondary text-secondary-foreground font-semibold py-4 px-8 rounded-xl;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:bg-secondary/80 active:scale-[0.98];
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-kiosk-success {
+    @apply bg-success text-success-foreground font-bold py-4 px-8 rounded-xl;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:scale-[1.02] active:scale-[0.98];
+    box-shadow: 0 8px 25px -5px hsl(145 65% 45% / 0.4);
+  }
+
+  .btn-kiosk-accent {
+    @apply bg-accent text-accent-foreground font-bold py-4 px-8 rounded-xl;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:scale-[1.02] active:scale-[0.98];
+    box-shadow: var(--shadow-accent);
+  }
+
+  /* Product Card */
+  .product-card {
+    @apply bg-card rounded-2xl overflow-hidden cursor-pointer;
+    @apply transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .product-card:hover {
+    @apply scale-[1.02];
+    box-shadow: var(--shadow-medium);
+  }
+
+  .product-card:active {
+    @apply scale-[0.98];
+  }
+
+  /* Category Button */
+  .category-btn {
+    @apply flex flex-col items-center justify-center p-3 rounded-xl;
+    @apply transition-all duration-200 ease-out;
+    @apply text-muted-foreground;
+  }
+
+  .category-btn.active {
+    @apply bg-primary text-primary-foreground;
+    box-shadow: var(--shadow-primary);
+  }
+
+  .category-btn:not(.active):hover {
+    @apply bg-secondary;
+  }
+
+  /* Ingredient Toggle */
+  .ingredient-toggle {
+    @apply relative flex flex-col items-center p-3 rounded-xl cursor-pointer;
+    @apply transition-all duration-300 ease-out;
+    @apply bg-card border-2 border-transparent;
+  }
+
+  .ingredient-toggle.included {
+    @apply border-success;
+  }
+
+  .ingredient-toggle.excluded {
+    @apply border-destructive opacity-50;
+  }
+
+  .ingredient-toggle:active {
+    @apply scale-95;
+  }
+
+  /* Kiosk Layout */
+  .kiosk-container {
+    @apply h-screen w-screen overflow-hidden flex flex-col;
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(40 25% 96%) 100%);
+  }
+
+  .kiosk-header {
+    height: var(--kiosk-header-height);
+    @apply flex items-center justify-between px-6;
+    background: var(--gradient-primary);
+  }
+
+  .kiosk-main {
+    @apply flex-1 flex overflow-hidden;
+    height: calc(100vh - var(--kiosk-header-height) - var(--kiosk-footer-height));
+  }
+
+  .kiosk-sidebar {
+    width: var(--kiosk-sidebar-width);
+    @apply bg-card overflow-y-auto py-4;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .kiosk-content {
+    @apply flex-1 overflow-y-auto p-6;
+  }
+
+  .kiosk-footer {
+    height: var(--kiosk-footer-height);
+    @apply bg-card flex items-center justify-between px-6;
+    box-shadow: 0 -4px 20px -4px hsl(0 0% 0% / 0.1);
+  }
+
+  /* Scrollbar Styling */
+  .kiosk-content::-webkit-scrollbar,
+  .kiosk-sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .kiosk-content::-webkit-scrollbar-track,
+  .kiosk-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .kiosk-content::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  /* Welcome Screen */
+  .welcome-screen {
+    @apply h-screen w-screen flex flex-col items-center justify-center;
+    background: var(--gradient-dark);
+  }
+
+  /* Promo Banner */
+  .promo-banner {
+    @apply relative overflow-hidden rounded-2xl;
+    background: var(--gradient-primary);
+  }
+
+  /* Touch Ripple Effect */
+  .touch-ripple {
+    @apply absolute inset-0 rounded-inherit overflow-hidden pointer-events-none;
+  }
+
+  .touch-ripple::after {
+    content: '';
+    @apply absolute inset-0 bg-white/20 scale-0 rounded-full;
+    @apply transition-transform duration-500;
+  }
+
+  .touch-ripple:active::after {
+    @apply scale-[2.5];
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 10px hsl(0 0% 0% / 0.3);
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out forwards;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out forwards;
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
