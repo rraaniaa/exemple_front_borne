@@ -7,10 +7,11 @@ import { MenuContent } from './MenuContent';
 import { CartSummary, CartPanel } from './CartSummary';
 import { PaymentScreen } from './PaymentScreen';
 import { OrderConfirmation } from './OrderConfirmation';
+import { BlankPage } from './BlankPage';
 import { useCart } from '@/context/CartContext';
 import { Product, CartItem } from '@/types/kiosk';
 
-type Screen = 'welcome' | 'menu' | 'payment' | 'confirmation';
+type Screen = 'welcome' | 'blank' | 'menu' | 'payment' | 'confirmation';
 
 export function KioskApp() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
@@ -46,7 +47,7 @@ export function KioskApp() {
 
   const handleStart = (orderType: 'dine-in' | 'takeaway') => {
     setOrderType(orderType);
-    setCurrentScreen('menu');
+    setCurrentScreen('blank');
   };
 
   const handleCheckout = () => {
@@ -88,6 +89,10 @@ export function KioskApp() {
       <AnimatePresence mode="wait">
         {currentScreen === 'welcome' && (
           <WelcomeScreen key="welcome" onStart={handleStart} />
+        )}
+
+        {currentScreen === 'blank' && (
+          <BlankPage key="blank" orderType={state.orderType} />
         )}
 
         {currentScreen === 'menu' && (
