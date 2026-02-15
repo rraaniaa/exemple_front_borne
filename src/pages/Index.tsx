@@ -1,11 +1,14 @@
 import { CartProvider } from "@/context/CartContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { KioskApp } from "@/components/kiosk/KioskApp";
 
 const Index = () => {
   return (
-    <CartProvider>
-      <KioskApp />
-    </CartProvider>
+    <LanguageProvider>
+      <CartProvider>
+        <KioskApp />
+      </CartProvider>
+    </LanguageProvider>
   );
 };
 

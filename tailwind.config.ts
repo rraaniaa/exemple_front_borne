@@ -12,6 +12,16 @@ export default {
         "2xl": "1400px",
       },
     },
+    screens: {
+      'xs': '375px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      'kiosk': '1080px',
+      'touch': { 'raw': '(hover: none) and (pointer: coarse)' },
+    },
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],

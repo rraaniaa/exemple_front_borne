@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Check, Printer, Home, Clock } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { CartItem } from '@/types/kiosk';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface OrderConfirmationProps {
   orderNumber: string;
@@ -16,6 +17,7 @@ export function OrderConfirmation({ orderNumber, total, orderType, items, onNewO
   const [countdown, setCountdown] = useState(30);
   const [showTicket, setShowTicket] = useState(false);
   const orderDate = useRef(new Date());
+  const { t } = useLanguage();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -46,33 +48,31 @@ export function OrderConfirmation({ orderNumber, total, orderType, items, onNewO
 
   return (
     <>
-      <div className="fixed inset-0 bg-background flex flex-col items-center justify-center z-50 p-8 print:hidden">
+      <div className="fixed inset-0 bg-background flex flex-col items-center justify-center z-50 p-4 sm:p-6 md:p-8 overflow-y-auto print:hidden">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', bounce: 0.4 }}
-          className="w-32 h-32 rounded-full bg-success flex items-center justify-center mb-8"
+          className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-success flex items-center justify-center mb-4 sm:mb-6 md:mb-8 flex-shrink-0"
           style={{ boxShadow: '0 0 60px hsl(145 65% 45% / 0.5)' }}
         >
-          <Check className="w-16 h-16 text-success-foreground" strokeWidth={3} />
+          <Check className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-success-foreground" strokeWidth={3} />
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-3xl font-bold text-foreground mb-2"
-        >
-          Commande Confirmée !
+          className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-1 sm:mb-2 text-center">
+          {t.orderConfirmed}
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-muted-foreground mb-8"
-        >
-          Merci pour votre commande
+          className="text-muted-foreground text-sm sm:text-base mb-4 sm:mb-6 md:mb-8">
+          {t.thankYou}
         </motion.p>
 
         {/* Order Card with Ticket Style */}
@@ -80,43 +80,43 @@ export function OrderConfirmation({ orderNumber, total, orderType, items, onNewO
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
-          className="bg-card rounded-3xl shadow-strong p-8 text-center mb-8 min-w-[400px] max-w-md"
+          className="bg-card rounded-2xl sm:rounded-3xl shadow-strong p-4 sm:p-6 md:p-8 text-center mb-4 sm:mb-6 md:mb-8 w-full max-w-md"
         >
           {/* Large Order Number */}
-          <div className="bg-secondary rounded-2xl p-6 mb-6">
-            <p className="text-muted-foreground text-sm mb-2">Votre numéro de commande</p>
-            <p className="text-6xl font-black text-primary tracking-widest">{orderNumber}</p>
+          <div className="bg-secondary rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 mb-3 sm:mb-4 md:mb-6">
+            <p className="text-muted-foreground text-xs sm:text-sm mb-1 sm:mb-2">{t.yourOrderNumber}</p>
+            <p className="text-4xl sm:text-5xl md:text-6xl font-black text-primary tracking-widest">{orderNumber}</p>
           </div>
           
           {/* QR Code for tracking */}
-          <div className="flex flex-col items-center py-4 border-y border-border mb-4">
-            <p className="text-sm text-muted-foreground mb-3">Scannez pour suivre votre commande</p>
+          <div className="flex flex-col items-center py-3 sm:py-4 border-y border-border mb-3 sm:mb-4">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">{t.scanToTrack}</p>
             <QRCodeSVG
               value={qrData}
-              size={120}
+              size={typeof window !== 'undefined' && window.innerWidth < 640 ? 90 : 120}
               level="M"
               includeMargin={false}
               className="rounded-lg"
             />
           </div>
           
-          <div className="flex items-center justify-center gap-4 py-4 border-b border-border">
-            <span className="text-2xl">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 py-3 sm:py-4 border-b border-border">
+            <span className="text-xl sm:text-2xl">
               {orderType === 'dine-in' ? '🍽️' : '🥡'}
             </span>
-            <span className="text-lg font-medium">
-              {orderType === 'dine-in' ? 'Sur Place' : 'À Emporter'}
+            <span className="text-base sm:text-lg font-medium">
+              {orderType === 'dine-in' ? t.dineIn : t.takeaway}
             </span>
           </div>
 
-          <div className="pt-4 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Clock className="w-4 h-4" />
-              <span className="text-sm">Temps estimé: 5-10 min</span>
+          <div className="pt-3 sm:pt-4 flex items-center justify-between">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground">
+              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="text-xs sm:text-sm">{t.estimatedTime}</span>
             </div>
             <div className="text-right">
-              <p className="text-sm text-muted-foreground">Total</p>
-              <p className="text-2xl font-bold text-foreground">{total.toFixed(2)} DH</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">{t.total}</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">{total.toFixed(2)} DT</p>
             </div>
           </div>
         </motion.div>
@@ -125,14 +125,14 @@ export function OrderConfirmation({ orderNumber, total, orderType, items, onNewO
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="flex gap-6 mb-8"
+          className="flex gap-4 sm:gap-6 mb-4 sm:mb-6 md:mb-8"
         >
           <button 
             onClick={handlePrint}
-            className="flex flex-col items-center gap-2 p-4 bg-card rounded-xl shadow-soft hover:shadow-medium transition-shadow"
+            className="flex flex-col items-center gap-1.5 sm:gap-2 p-3 sm:p-4 bg-card rounded-xl shadow-soft hover:shadow-medium transition-shadow"
           >
-            <Printer className="w-8 h-8 text-primary" />
-            <span className="text-sm font-medium">Imprimer Ticket</span>
+            <Printer className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+            <span className="text-xs sm:text-sm font-medium">{t.printTicket}</span>
           </button>
         </motion.div>
 
@@ -140,9 +140,9 @@ export function OrderConfirmation({ orderNumber, total, orderType, items, onNewO
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="text-muted-foreground text-sm mb-4"
+          className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4"
         >
-          Retour automatique dans {countdown} secondes
+          {t.autoReturn} {countdown} secondes
         </motion.p>
 
         <motion.button
@@ -150,10 +150,10 @@ export function OrderConfirmation({ orderNumber, total, orderType, items, onNewO
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
           onClick={onNewOrder}
-          className="btn-kiosk-primary flex items-center gap-3"
+          className="btn-kiosk-primary flex items-center gap-2 sm:gap-3 py-3 sm:py-4 px-6 sm:px-8 text-sm sm:text-base"
         >
           <Home className="w-5 h-5" />
-          <span>Nouvelle Commande</span>
+          <span>{t.newOrder}</span>
         </motion.button>
       </div>
 
@@ -268,7 +268,7 @@ function PrintableTicket({
       <div className="py-2 border-b border-dashed border-gray-400">
         <div className="flex justify-between text-sm font-bold">
           <span>TOTAL</span>
-          <span>{total.toFixed(2)} DH</span>
+          <span>{total.toFixed(2)} DT</span>
         </div>
       </div>
 

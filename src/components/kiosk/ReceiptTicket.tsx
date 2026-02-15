@@ -111,7 +111,7 @@ export const ReceiptTicket = forwardRef<HTMLDivElement, ReceiptTicketProps>(
         <div className="py-3 border-b border-dashed border-gray-400">
           <div className="flex justify-between text-lg font-bold">
             <span>TOTAL</span>
-            <span>{total.toFixed(2)} DH</span>
+            <span>{total.toFixed(2)} DT</span>
           </div>
         </div>
 

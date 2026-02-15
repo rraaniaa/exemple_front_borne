@@ -26,16 +26,13 @@ import cheese from '@/assets/ingredients/cheese.png';
 import pickle from '@/assets/ingredients/pickle.png';
 import sauce from '@/assets/ingredients/sauce.png';
 
-// Import banner
-import heroBanner from '@/assets/banners/hero-banner.jpg';
-
 export const categories: Category[] = [
-  { id: 'burgers', name: 'Burgers', icon: '🍔' },
-  { id: 'sides', name: 'Accompagnements', icon: '🍟' },
-  { id: 'drinks', name: 'Boissons', icon: '🥤' },
-  { id: 'salads', name: 'Salades', icon: '🥗' },
-  { id: 'wraps', name: 'Wraps', icon: '🌯' },
-  { id: 'desserts', name: 'Desserts', icon: '🍨' },
+  { id: 'burgers', name: 'Burgers', icon: '🍔', image: burgerClassic },
+  { id: 'sides', name: 'Accompagnements', icon: '🍟', image: fries },
+  { id: 'drinks', name: 'Boissons', icon: '🥤', image: cocaCola },
+  { id: 'salads', name: 'Salades', icon: '🥗', image: salad },
+  { id: 'wraps', name: 'Wraps', icon: '🌯', image: wrap },
+  { id: 'desserts', name: 'Desserts', icon: '🍨', image: sundae },
 ];
 
 export const products: Product[] = [
@@ -271,11 +268,11 @@ export const products: Product[] = [
 
 export const welcomeMedia: MediaItem[] = [
   {
-    id: 'banner-1',
-    type: 'image',
-    url: heroBanner,
-    title: 'Menu du Moment',
-    duration: 5000,
+    id: 'video-1',
+    type: 'video',
+    url: 'https://videos.pexels.com/video-files/3298572/3298572-uhd_2560_1440_30fps.mp4',
+    title: 'Bienvenue',
+    duration: 30000,
     isActive: true,
   },
 ];

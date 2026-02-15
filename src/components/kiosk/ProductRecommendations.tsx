@@ -38,7 +38,7 @@ export function ProductRecommendations({ title, products, onProductSelect }: Pro
             <div className="text-left">
               <p className="font-medium text-sm text-foreground line-clamp-1">{product.name}</p>
               <p className="text-primary font-bold text-sm">
-                +{(product.isPromo && product.promoPrice ? product.promoPrice : product.price).toFixed(2)} DH
+                +{(product.isPromo && product.promoPrice ? product.promoPrice : product.price).toFixed(2)} DT
               </p>
             </div>
           </motion.button>

@@ -51,10 +51,11 @@
 
     --radius: 1rem;
 
-    /* Custom Kiosk Variables */
-    --kiosk-header-height: 80px;
-    --kiosk-footer-height: 100px;
-    --kiosk-sidebar-width: 140px;
+    /* Custom Kiosk Variables - responsive defaults (mobile-first) */
+    --kiosk-header-height: 56px;
+    --kiosk-footer-height: 72px;
+    --kiosk-sidebar-width: 0px;
+    --kiosk-sidebar-height: 72px;
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(350 85% 50%), hsl(350 85% 40%));
@@ -128,6 +129,8 @@
     font-family: 'Poppins', sans-serif;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    height: 100%;
+    height: 100dvh;
   }
 
   body {
@@ -135,34 +138,37 @@
     font-feature-settings: "cv11", "ss01";
     user-select: none;
     overflow: hidden;
+    height: 100%;
+    height: 100dvh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 }
 
 @layer components {
   /* Kiosk Button Variants */
   .btn-kiosk-primary {
-    @apply bg-primary text-primary-foreground font-bold py-4 px-8 rounded-xl;
+    @apply bg-primary text-primary-foreground font-bold py-3 px-5 sm:py-4 sm:px-8 rounded-xl;
     @apply transition-all duration-200 ease-out;
     @apply hover:scale-[1.02] active:scale-[0.98];
     box-shadow: var(--shadow-primary);
   }
 
   .btn-kiosk-secondary {
-    @apply bg-secondary text-secondary-foreground font-semibold py-4 px-8 rounded-xl;
+    @apply bg-secondary text-secondary-foreground font-semibold py-3 px-5 sm:py-4 sm:px-8 rounded-xl;
     @apply transition-all duration-200 ease-out;
     @apply hover:bg-secondary/80 active:scale-[0.98];
     box-shadow: var(--shadow-soft);
   }
 
   .btn-kiosk-success {
-    @apply bg-success text-success-foreground font-bold py-4 px-8 rounded-xl;
+    @apply bg-success text-success-foreground font-bold py-3 px-5 sm:py-4 sm:px-8 rounded-xl;
     @apply transition-all duration-200 ease-out;
     @apply hover:scale-[1.02] active:scale-[0.98];
     box-shadow: 0 8px 25px -5px hsl(145 65% 45% / 0.4);
   }
 
   .btn-kiosk-accent {
-    @apply bg-accent text-accent-foreground font-bold py-4 px-8 rounded-xl;
+    @apply bg-accent text-accent-foreground font-bold py-3 px-5 sm:py-4 sm:px-8 rounded-xl;
     @apply transition-all duration-200 ease-out;
     @apply hover:scale-[1.02] active:scale-[0.98];
     box-shadow: var(--shadow-accent);
@@ -170,7 +176,7 @@
 
   /* Product Card */
   .product-card {
-    @apply bg-card rounded-2xl overflow-hidden cursor-pointer;
+    @apply bg-card rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer;
     @apply transition-all duration-300 ease-out;
     box-shadow: var(--shadow-soft);
   }
@@ -186,7 +192,7 @@
 
   /* Category Button */
   .category-btn {
-    @apply flex flex-col items-center justify-center p-3 rounded-xl;
+    @apply flex flex-col items-center justify-center p-2 sm:p-3 rounded-lg sm:rounded-xl;
     @apply transition-all duration-200 ease-out;
     @apply text-muted-foreground;
   }
@@ -219,36 +225,38 @@
     @apply scale-95;
   }
 
-  /* Kiosk Layout */
+  /* Kiosk Layout - Mobile First */
   .kiosk-container {
     @apply h-screen w-screen overflow-hidden flex flex-col;
     background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(40 25% 96%) 100%);
   }
 
   .kiosk-header {
-    height: var(--kiosk-header-height);
-    @apply flex items-center justify-between px-6;
+    min-height: var(--kiosk-header-height);
+    @apply flex items-center justify-between px-3 sm:px-4 md:px-6;
     background: var(--gradient-primary);
   }
 
   .kiosk-main {
-    @apply flex-1 flex overflow-hidden;
+    @apply flex-1 flex flex-col md:flex-row overflow-hidden;
     height: calc(100vh - var(--kiosk-header-height) - var(--kiosk-footer-height));
   }
 
   .kiosk-sidebar {
-    width: var(--kiosk-sidebar-width);
-    @apply bg-card overflow-y-auto py-4;
+    @apply bg-card overflow-x-auto overflow-y-hidden md:overflow-y-auto md:overflow-x-hidden;
+    /* Mobile: horizontal strip */
+    height: var(--kiosk-sidebar-height);
+    width: 100%;
     box-shadow: var(--shadow-soft);
   }
 
   .kiosk-content {
-    @apply flex-1 overflow-y-auto p-6;
+    @apply flex-1 overflow-y-auto p-3 sm:p-4 md:p-6;
   }
 
   .kiosk-footer {
-    height: var(--kiosk-footer-height);
-    @apply bg-card flex items-center justify-between px-6;
+    min-height: var(--kiosk-footer-height);
+    @apply bg-card flex items-center justify-between px-3 sm:px-4 md:px-6 py-2;
     box-shadow: 0 -4px 20px -4px hsl(0 0% 0% / 0.1);
   }
 
@@ -360,5 +368,46 @@
       opacity: 1;
       transform: scale(1);
     }
+  }
+}
+
+/* ===== Responsive Breakpoints for Kiosk Variables ===== */
+
+/* Small tablets (≥640px) */
+@media (min-width: 640px) {
+  :root {
+    --kiosk-header-height: 64px;
+    --kiosk-footer-height: 80px;
+    --kiosk-sidebar-height: 80px;
+  }
+}
+
+/* Tablets / Small kiosks (≥768px) */
+@media (min-width: 768px) {
+  :root {
+    --kiosk-header-height: 72px;
+    --kiosk-footer-height: 90px;
+    --kiosk-sidebar-width: 110px;
+    --kiosk-sidebar-height: 0px;
+  }
+  .kiosk-sidebar {
+    width: var(--kiosk-sidebar-width) !important;
+    height: 100% !important;
+  }
+}
+
+/* Desktops / Large kiosks (≥1024px) */
+@media (min-width: 1024px) {
+  :root {
+    --kiosk-header-height: 80px;
+    --kiosk-footer-height: 100px;
+    --kiosk-sidebar-width: 130px;
+  }
+}
+
+/* Extra-large kiosks (≥1280px) */
+@media (min-width: 1280px) {
+  :root {
+    --kiosk-sidebar-width: 140px;
   }
 }

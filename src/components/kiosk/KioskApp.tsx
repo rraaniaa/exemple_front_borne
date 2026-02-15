@@ -47,7 +47,7 @@ export function KioskApp() {
 
   const handleStart = (orderType: 'dine-in' | 'takeaway') => {
     setOrderType(orderType);
-    setCurrentScreen('blank');
+    setCurrentScreen('menu');
   };
 
   const handleCheckout = () => {
@@ -96,7 +96,7 @@ export function KioskApp() {
         )}
 
         {currentScreen === 'menu' && (
-          <div key="menu" className="flex flex-col h-full">
+          <div key="menu" className="flex flex-col h-full w-full">
             <KioskHeader onCartClick={() => setIsCartOpen(true)} />
             <div className="kiosk-main">
               <CategorySidebar

@@ -111,12 +111,12 @@ export function BorneKioskApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-2 sm:p-4">
       {/* Header */}
-      <div className="max-w-6xl mx-auto mb-6">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h1 className="text-4xl font-bold text-indigo-600 mb-2">🎯 BORNE Kiosk</h1>
-          <p className="text-gray-600">Welcome to the self-service ordering system</p>
+      <div className="max-w-6xl mx-auto mb-3 sm:mb-4 md:mb-6">
+        <div className="bg-white rounded-lg shadow-lg p-3 sm:p-4 md:p-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-600 mb-1 sm:mb-2">🎯 BORNE Kiosk</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Welcome to the self-service ordering system</p>
 
           {/* Backend Status */}
           <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
@@ -137,24 +137,24 @@ export function BorneKioskApp() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
         {/* Products Section */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">Products</h2>
+          <div className="bg-white rounded-lg shadow-lg p-3 sm:p-4 md:p-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Products</h2>
 
             {loading ? (
               <p className="text-center text-gray-600">Loading products...</p>
             ) : products.length === 0 ? (
               <p className="text-center text-gray-600">No products available</p>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
-                    <h3 className="font-semibold text-lg">{product.name}</h3>
-                    <p className="text-gray-600 text-sm mt-2">{product.description}</p>
-                    <div className="flex justify-between items-center mt-4">
-                      <span className="text-2xl font-bold text-indigo-600">
+                  <div key={product.id} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition">
+                    <h3 className="font-semibold text-base sm:text-lg">{product.name}</h3>
+                    <p className="text-gray-600 text-xs sm:text-sm mt-1 sm:mt-2">{product.description}</p>
+                    <div className="flex justify-between items-center mt-3 sm:mt-4">
+                      <span className="text-xl sm:text-2xl font-bold text-indigo-600">
                         ${product.price?.toFixed(2) || '0.00'}
                       </span>
                       <Button
